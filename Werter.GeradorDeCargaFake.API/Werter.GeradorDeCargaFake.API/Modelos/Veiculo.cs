@@ -1,5 +1,4 @@
 using System;
-using Bogus.DataSets;
 
 namespace Werter.GeradorDeCargaFake.API.Modelos
 {
@@ -14,6 +13,6 @@ namespace Werter.GeradorDeCargaFake.API.Modelos
         public string NumeroDocumento { get; set; }
         public string Placa { get; set; }
         public decimal Valor { get; set; }
-        public Date DataHoraCadastro { get; set; }
+        public DateTime DataHoraCadastro { get; set; }
     }
 }

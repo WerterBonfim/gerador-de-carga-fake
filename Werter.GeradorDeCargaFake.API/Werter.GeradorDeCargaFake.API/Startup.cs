@@ -38,6 +38,7 @@ namespace Werter.GeradorDeCargaFake.API
         {
             services.AddApiConfiguration();
             services.AddSwaggerConfiguration();
+            services.RegisterServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

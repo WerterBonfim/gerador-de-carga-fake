@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Werter.GeradorDeCargaFake.API.Parametros;
+using Werter.GeradorDeCargaFake.API.Servico;
 
 namespace Werter.GeradorDeCargaFake.API.Controllers
 {
@@ -9,6 +10,13 @@ namespace Werter.GeradorDeCargaFake.API.Controllers
     [Route("[controller]")]
     public class CargaController : ControllerBase
     {
+        private readonly ServicoGeradorDeCarga _servicoGeradorDeCarga;
+
+        public CargaController(ServicoGeradorDeCarga servicoGeradorDeCarga)
+        {
+            _servicoGeradorDeCarga = servicoGeradorDeCarga;
+        }
+
         [HttpPost]
         public IActionResult GerarTabelaFake([FromBody] CargaCommand command)
         {
@@ -17,14 +25,14 @@ namespace Werter.GeradorDeCargaFake.API.Controllers
                 if (!command.EstaValido())
                     return BadRequest(command.ListarErros());
 
+                _servicoGeradorDeCarga.GerarCargaFake(command);
 
-                return Ok();
+                return Ok("Carga efetua com sucesso");
 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                return StatusCode(StatusCodes.Status500InternalServerError, command.ListarErros());
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
     }
