@@ -9,6 +9,7 @@ namespace Werter.GeradorDeCargaFake.API.Configuracoes
         {
             services.AddTransient<ServicoGeradorDeCarga>();
 
+
             return services;
         }
     }
